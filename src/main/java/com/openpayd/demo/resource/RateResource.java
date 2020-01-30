@@ -8,9 +8,11 @@ import com.openpayd.demo.mapper.IRateMapper;
 import com.openpayd.demo.model.dto.external.RatePairDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RestController;
 
 
+import javax.validation.Valid;
 import javax.validation.constraints.Size;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -19,7 +21,7 @@ import javax.ws.rs.core.Response;
 import java.util.Optional;
 
 
-
+@Validated
 @RestController
 @Path("/api/rates")
 @Slf4j
