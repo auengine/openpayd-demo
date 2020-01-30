@@ -8,15 +8,16 @@ public abstract class RuntimeExceptionBase extends RuntimeException {
     private static final long serialVersionUID = 1L;
     protected Optional<ApiErrors> apiErrors;
 
-    public RuntimeExceptionBase(){}
-
-    public RuntimeExceptionBase(String message,Exception e){
-        super(message,e );
+    public RuntimeExceptionBase() {
     }
 
-    public RuntimeExceptionBase(Optional<ApiErrors> apiErrors,String message,Exception e){
-        super(message,e );
-        this.apiErrors=apiErrors;
+    public RuntimeExceptionBase(String message, Exception e) {
+        super(message, e);
+    }
+
+    public RuntimeExceptionBase(Optional<ApiErrors> apiErrors, String message, Exception e) {
+        super(message, e);
+        this.apiErrors = apiErrors;
     }
 
     public Optional<ApiErrors> getApiErrors() {

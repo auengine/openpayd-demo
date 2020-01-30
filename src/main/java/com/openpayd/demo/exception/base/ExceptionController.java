@@ -19,6 +19,7 @@ public class ExceptionController {
         return new ResponseEntity<>("Illegal time not found", HttpStatus.INTERNAL_SERVER_ERROR);
 
     }
+
     @ExceptionHandler(value = RuntimeException.class)
     public ResponseEntity<Object> exception(RuntimeException exception) {
         return new ResponseEntity<>("Run time not found", HttpStatus.INTERNAL_SERVER_ERROR);

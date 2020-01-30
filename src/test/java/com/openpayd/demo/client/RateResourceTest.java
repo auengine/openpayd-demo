@@ -1,30 +1,34 @@
 package com.openpayd.demo.client;
 
-import com.openpayd.demo.clientproxy.IExternalRateResource;
-import com.openpayd.demo.model.dto.external.RatePairDTO;
+
+import com.openpayd.demo.resource.RateResource;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.ws.rs.core.Response;
+
+import static org.junit.Assert.assertEquals;
 
 
 @RunWith(SpringRunner.class)
-@SpringBootTest()
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class RateResourceTest {
 
-  @Autowired
-  private IExternalRateResource rateResource;
+    @Autowired
+    private RateResource resource;
+
+
   @Test
   public void shouldGetPairForDate() throws Exception {
-   RatePairDTO ratePair= rateResource.getLatestPair(
+   Response response= resource.getCurrencyRate(
             "EUR","USD"
             );
-
-
-
-
+      assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
 
   }
+
 }

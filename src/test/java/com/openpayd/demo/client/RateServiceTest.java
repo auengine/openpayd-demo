@@ -1,96 +1,62 @@
 package com.openpayd.demo.client;
 
 
-
-import com.openpayd.demo.model.Conversion;
-import com.openpayd.demo.repository.IConversitonRepository;
-import com.openpayd.demo.service.IConversionService;
-import com.openpayd.demo.service.impl.ConversionServiceImpl;
+import com.openpayd.demo.clientproxy.IExternalRateResource;
+import com.openpayd.demo.model.dto.external.RatePairDTO;
+import com.openpayd.demo.service.IRateService;
 import com.openpayd.demo.util.DateUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-
-import java.time.LocalDate;
-
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 import static junit.framework.TestCase.assertNotNull;
-
-import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 
 
 @RunWith(SpringRunner.class)
-@SpringBootTest()
-public class ConversionServiceTest {
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+public class RateServiceTest {
 
-    @MockBean
-    private IConversitonRepository repository;
-
-    @Autowired
-    private IConversionService conversionService;
-
-    private final double amount = 123.1;
     private final double rate = 0.9;
-    final String transactionId = "TRTID";
     private final String base = "USD";
     private final String symbol = "EUR";
-    private List<Conversion> conversionList;
-    private final int size = 20;
+
+    @MockBean
+    private IExternalRateResource rateClient;
+
+    @Autowired
+    private IRateService rateService;
+
     @Before
     public void setup() {
-        conversionList= new ArrayList<Conversion>();
-        for(int i=0; i<size; i++){
 
-            Conversion conversion=new Conversion();
-            conversion.setAmount(amount);
-            conversion.setRate(rate);
-            conversion.setConvertion(rate * amount);
-            conversion.setTransactionId(transactionId+i);
-            conversion.setBase(base);
-            conversion.setSymbol(symbol);
-            conversion.setConversionTime(LocalDate.now());
-            conversionList.add(conversion);
-        }
-      Mockito.when(repository.findByTransactionId(anyString())).thenReturn(Optional.of(conversionList.get(0)));
-      Mockito.when(repository.listByDate(any(LocalDate.class),any(LocalDate.class),any(PageRequest.class))).
-              thenReturn(new PageImpl<Conversion>(conversionList));
+        RatePairDTO ratePairDTO = new RatePairDTO();
+        ratePairDTO.setBase(base);
+        ratePairDTO.setDate(DateUtils.now());
+        Map<String, Double> rates = new HashMap<String, Double>();
+        rates.put(symbol, rate);
+        ratePairDTO.setRates(rates);
 
-
+        Mockito.when(rateClient.getLatestPair(anyString(),anyString())).thenReturn(ratePairDTO);
     }
+
 
     @Test
     public void testListConversions_thenConversionListWithTransactionIDShouldBeReturned() {
-        List<Conversion> result= conversionService.listConversions(Optional.of(transactionId),Optional.ofNullable(null),0,0);
+        RatePairDTO result = rateService.getLatestPair(Optional.of(base), Optional.ofNullable(symbol));
         assertNotNull(result);
-        assertTrue(result.size()==1);
-        assertEquals(result.get(0).getTransactionId(),transactionId+0);
+        assertEquals(result.getBase(), base);
     }
-
-    @Test
-    public void testListConversions_thenConversionListWithDateShouldBeReturned() {
-        List<Conversion> result= conversionService.listConversions(Optional.ofNullable(null),Optional.of(DateUtils.YYYYDASHMMDASHDD(LocalDate.now())),0,size);
-        assertNotNull(result);
-        assertTrue(result.size()==size);
-        assertEquals(result.get(size-1).getTransactionId(),transactionId+(size-1));
-    }
-
-
-
-
 
 }

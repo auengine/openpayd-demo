@@ -5,6 +5,6 @@ import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class RatePairDTO {
+public class RateDTO {
     public double rate;
 }

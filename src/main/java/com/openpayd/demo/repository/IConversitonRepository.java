@@ -20,7 +20,7 @@ public interface IConversitonRepository extends PagingAndSortingRepository<Conve
     Optional<Conversion> findByTransactionId(@Param("transactionId") String transactionId);
 
     @Query("SELECT c FROM Conversion c WHERE c.conversionTime between :startDate AND :endDate")
-    Page<Conversion> listByDate(@Param("startDate") LocalDate startDate, @Param("endDate")LocalDate endDate, Pageable pageable);
+    Page<Conversion> listByDate(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate, Pageable pageable);
 
 }
 

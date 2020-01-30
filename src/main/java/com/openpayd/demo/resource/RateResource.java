@@ -2,22 +2,22 @@ package com.openpayd.demo.resource;
 
 import com.openpayd.demo.config.constants.ApiErrors;
 import com.openpayd.demo.exception.RatePairNotFound;
-import com.openpayd.demo.resource.base.BaseResource;
-import com.openpayd.demo.service.IRateService;
 import com.openpayd.demo.mapper.IRateMapper;
 import com.openpayd.demo.model.dto.external.RatePairDTO;
+import com.openpayd.demo.resource.base.BaseResource;
+import com.openpayd.demo.service.IRateService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RestController;
 
-
-import javax.validation.Valid;
 import javax.validation.constraints.Size;
-import javax.ws.rs.*;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
 import java.util.Optional;
 
 
@@ -25,7 +25,7 @@ import java.util.Optional;
 @RestController
 @Path("/api/rates")
 @Slf4j
-public class ExchangeRateResource extends BaseResource {
+public class RateResource extends BaseResource {
 
   @Autowired
   private IRateService rateService;

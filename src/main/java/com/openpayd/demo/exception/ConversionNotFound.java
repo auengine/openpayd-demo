@@ -5,9 +5,10 @@ import com.openpayd.demo.exception.base.RuntimeExceptionBase;
 public class ConversionNotFound extends RuntimeExceptionBase {
     private static final long serialVersionUID = 1L;
 
-    public ConversionNotFound(){}
+    public ConversionNotFound() {
+    }
 
-    public ConversionNotFound(String message){
-        super(message,null );
+    public ConversionNotFound(String message) {
+        super(message, null);
     }
 }

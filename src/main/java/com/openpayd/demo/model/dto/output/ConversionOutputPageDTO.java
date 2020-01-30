@@ -8,8 +8,8 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
 public class ConversionOutputPageDTO {
-  public List<ConversionOutputDTO> items;
-  public int page;
-  public int pageSize;
+    public List<ConversionOutputDTO> items;
+    public int page;
+    public int pageSize;
 
 }

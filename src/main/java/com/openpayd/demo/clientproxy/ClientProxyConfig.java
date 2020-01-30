@@ -10,25 +10,26 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ClientProxyConfig {
 
-  @Value("${ratesapi.url}")
-  private String ratesApiUrl;
+    @Value("${ratesapi.url}")
+    private String ratesApiUrl;
+/*
+    @Bean
+    public IExternalRateResource getRatesClient() {
+        ResteasyClient client = new ResteasyClientBuilder().
+                defaultProxy("proxy.borsa.local", 8080, "http")
+                .build();
+        ResteasyWebTarget target = client.target(ratesApiUrl);
+        IExternalRateResource proxy = target.proxy(IExternalRateResource.class);
+        return proxy;
+    }*/
+
 
   @Bean
   public IExternalRateResource getRatesClient() {
-    ResteasyClient client = new ResteasyClientBuilder().
-            defaultProxy("proxy.borsa.local", 8080, "http").build();
-    ResteasyWebTarget target = client.target(ratesApiUrl);
-    IExternalRateResource proxy = target.proxy(IExternalRateResource.class);
-    return proxy;
-  }
-
-
-/*  @Bean
-  public IRateResource getRatesClient() {
     ResteasyClient client = new ResteasyClientBuilder().build();
     ResteasyWebTarget target = client.target(ratesApiUrl);
-    IRateResource proxy = target.proxy(IRateResource.class);
+      IExternalRateResource proxy = target.proxy(IExternalRateResource.class);
     return proxy;
-  }*/
+  }
 
 }

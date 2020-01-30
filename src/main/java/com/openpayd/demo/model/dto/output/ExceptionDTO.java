@@ -1,6 +1,6 @@
 package com.openpayd.demo.model.dto.output;
 
-public class ExceptionDTO  {
+public class ExceptionDTO {
     private String message;
     private String code;
 
@@ -14,6 +14,7 @@ public class ExceptionDTO  {
     public void setMessage(String message) {
         this.message = message;
     }
+
     public String getCode() {
         return code;
     }
@@ -28,7 +29,7 @@ public class ExceptionDTO  {
         } else if (!(o instanceof ExceptionDTO)) {
             return false;
         } else {
-            ExceptionDTO other = (ExceptionDTO)o;
+            ExceptionDTO other = (ExceptionDTO) o;
             if (!other.canEqual(this)) {
                 return false;
             } else {

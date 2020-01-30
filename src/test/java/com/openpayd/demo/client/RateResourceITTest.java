@@ -20,9 +20,8 @@ import static org.junit.Assert.assertNotNull;
 
 
 @RunWith(SpringRunner.class)
-@ContextConfiguration
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class ExchangeRateResourceITTest {
+public class RateResourceITTest {
 
 
     private static final String getUrl = "/api/rates";

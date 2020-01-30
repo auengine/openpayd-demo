@@ -35,7 +35,7 @@ public class ConversionResource   extends BaseResource {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("convert")
+    @Path("/convert")
     public Response convert(ConversionInputDTO input) {
         try {
             Conversion result = conversionService.calculate(input);

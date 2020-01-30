@@ -5,7 +5,6 @@ import com.openpayd.demo.exception.base.RuntimeExceptionBase;
 import com.openpayd.demo.model.dto.output.ExceptionDTO;
 import org.springframework.util.StringUtils;
 
-import javax.swing.text.html.Option;
 import javax.ws.rs.core.Response;
 import java.util.Optional;
 

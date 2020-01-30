@@ -13,6 +13,7 @@ import java.util.Optional;
 public interface IConversionService {
 
     public Conversion calculate(ConversionInputDTO input) throws RatePairNotFound;
-    public List<Conversion> listConversions(Optional<String> transactionId,Optional<String> date,int pageNo,int pageSize) throws ConversionNotFound;
+
+    public List<Conversion> listConversions(Optional<String> transactionId, Optional<String> date, int pageNo, int pageSize) throws ConversionNotFound;
 
 }
